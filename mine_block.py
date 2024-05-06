@@ -81,7 +81,7 @@ prev_b_hash = "0000aeff00000000000000000000000000000000000000000000000000000000"
 prev_b_hash_little = bytes.fromhex(prev_b_hash)[::-1].hex()
 b_merkle_root = merkle_root(txids)
 b_merkle_root_little = bytes.fromhex(b_merkle_root)[::-1].hex()
-time = 1714984582
+time = 1714992489
 time_hex = time.to_bytes(4, byteorder='little').hex()
 bits = "ffff001f"
 
