@@ -75,7 +75,7 @@ coinbase_txid = dsha256(coinbase_txn)
 
 txids.insert(0, coinbase_txid)
 
-# block
+# block 
 b_version = "02000000"
 prev_b_hash = "0000aeff00000000000000000000000000000000000000000000000000000000"
 b_merkle_root = merkle_root(txids)
