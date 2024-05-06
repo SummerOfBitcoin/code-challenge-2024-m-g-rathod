@@ -910,7 +910,7 @@ for i in range(len(json_data_list)):
     if op_len <= 252:
         outputs += op_len.to_bytes(1, byteorder='little').hex()
     elif 253 <= op_len <= 65535:
-        inputs += "fd"
+        outputs += "fd"
         outputs += op_len.to_bytes(2, byteorder='little').hex()
     elif 65536 <= op_len <= 4294967295:
         outputs += "fe"
@@ -958,11 +958,11 @@ for i in range(len(json_data_list)):
                 witness += "fd"
                 witness += witness_stack_len.to_bytes(2, byteorder='little').hex()
             elif 65536 <= witness_stack_len <= 4294967295:
-                inputs += "fe"
-                inputs += witness_stack_len.to_bytes(4, byteorder='little').hex()
+                witness += "fe"
+                witness += witness_stack_len.to_bytes(4, byteorder='little').hex()
             else:
-                inputs += "ff"
-                inputs += witness_stack_len.to_bytes(8, byteorder='little').hex()
+                witness += "ff"
+                witness += witness_stack_len.to_bytes(8, byteorder='little').hex()
 
             for item in ip['witness']:
                 if item == "":
@@ -975,11 +975,11 @@ for i in range(len(json_data_list)):
                         witness += "fd"
                         witness += item_len.to_bytes(2, byteorder='little').hex()
                     elif 65536 <= item_len <= 4294967295:
-                        inputs += "fe"
-                        inputs += item_len.to_bytes(4, byteorder='little').hex()
+                        witness += "fe"
+                        witness += item_len.to_bytes(4, byteorder='little').hex()
                     else:
-                        inputs += "ff"
-                        inputs += item_len.to_bytes(8, byteorder='little').hex()
+                        witness += "ff"
+                        witness += item_len.to_bytes(8, byteorder='little').hex()
 
                     witness += item
 
