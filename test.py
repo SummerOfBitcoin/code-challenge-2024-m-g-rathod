@@ -1141,42 +1141,46 @@
 #             else:
 #                 print('valid addr')
 
-import hashlib
+# import hashlib
 
-def dsha256(message):
-    byte_value = bytes.fromhex(message)
-    first_hash = hashlib.sha256(byte_value).digest()
-    second_hash = hashlib.sha256(first_hash).digest()
-    return second_hash.hex()
+# def dsha256(message):
+#     byte_value = bytes.fromhex(message)
+#     first_hash = hashlib.sha256(byte_value).digest()
+#     second_hash = hashlib.sha256(first_hash).digest()
+#     return second_hash.hex()
 
-def merkle_root(tx_hashes):
-    if len(tx_hashes) == 0:
-        return None
-    elif len(tx_hashes) == 1:
-        return tx_hashes[0]
+# def merkle_root(tx_hashes):
+#     if len(tx_hashes) == 0:
+#         return None
+#     elif len(tx_hashes) == 1:
+#         return tx_hashes[0]
 
-    new_tx_hashes = []
-    for i in range(0, len(tx_hashes), 2):
-        if i < len(tx_hashes) - 1:
-            message = tx_hashes[i] + tx_hashes[i + 1]
-            new_tx_hashes.append(dsha256(message))
+#     new_tx_hashes = []
+#     for i in range(0, len(tx_hashes), 2):
+#         if i < len(tx_hashes) - 1:
+#             message = tx_hashes[i] + tx_hashes[i + 1]
+#             new_tx_hashes.append(dsha256(message))
             
-        else:
-            message = tx_hashes[i] + tx_hashes[i]
-            new_tx_hashes.append(dsha256(message))
+#         else:
+#             message = tx_hashes[i] + tx_hashes[i]
+#             new_tx_hashes.append(dsha256(message))
 
-    print(new_tx_hashes)
-    return merkle_root(new_tx_hashes)
+#     print(new_tx_hashes)
+#     return merkle_root(new_tx_hashes)
 
 
-l1 = [
-    "0000000000000000000000000000000000000000000000000000000000000000",
-    "a28e549dc50610430bf7e224effd50db0662356780c934af0f1a9eb346d50087",
-    "87cbcb26ef9618f1363c0b0ae62c3ab6de1daf67fa6404c416a4d36059ab4bc5",
-    "85770dfeb29679fdb24e7ca87ca7d162962f6247269282f155f99e0061e31de5"
-]
+# l1 = [
+#     "0000000000000000000000000000000000000000000000000000000000000000",
+#     "a28e549dc50610430bf7e224effd50db0662356780c934af0f1a9eb346d50087",
+#     "87cbcb26ef9618f1363c0b0ae62c3ab6de1daf67fa6404c416a4d36059ab4bc5",
+#     "85770dfeb29679fdb24e7ca87ca7d162962f6247269282f155f99e0061e31de5"
+# ]
 
-print(merkle_root(l1))
+# print(merkle_root(l1))
+from Crypto.Hash import RIPEMD160
+data_bytes = bytes.fromhex('a28e549dc50610430bf7e224effd50db0662356780c934af0f1a9eb346d50087')
+h = RIPEMD160.new(data_bytes)
+print(h.hexdigest())
 
 
 

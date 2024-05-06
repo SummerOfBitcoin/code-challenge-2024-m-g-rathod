@@ -5,6 +5,7 @@ import ecdsa
 from ecdsa.util import sigdecode_der
 import base58
 import bech32
+from Crypto.Hash import RIPEMD160
 
 cnt = 0
 new_opcodes = set()
@@ -124,9 +125,8 @@ def dsha256(message):
 
 def ripemd160(message):
     bytes_data = bytes.fromhex(message)
-    ripemd160_hash = hashlib.new('ripemd160', bytes_data).digest()
-    ripemd160_hex = ripemd160_hash.hex()
-    return ripemd160_hex
+    h = RIPEMD160.new(bytes_data)
+    return h.hexdigest()
 
 def sha256(hex_string):
     byte_string = bytes.fromhex(hex_string)
@@ -1032,9 +1032,9 @@ for i in range(len(json_data_list)):
             public_key = script_sig_list[len(script_sig_list) - 1]
             scriptpubkey_pkh = asm_list[3]
 
-            sha256_hash = hashlib.sha256(bytes.fromhex(public_key)).digest()
-            ripemd160_hash = hashlib.new('ripemd160', sha256_hash).digest()
-            scriptsig_pkh = ripemd160_hash.hex()
+            sha256_hash = hashlib.sha256(bytes.fromhex(public_key)).hexdigest()
+            ripemd160_hash = ripemd160(sha256_hash)
+            scriptsig_pkh = ripemd160_hash
 
             if scriptsig_pkh != scriptpubkey_pkh:
                 invalid_txn.add(filename)
@@ -1078,9 +1078,9 @@ for i in range(len(json_data_list)):
             public_key = ip['witness'][1]
             scriptpubkey_pkh = asm_list[2]
 
-            sha256_hash = hashlib.sha256(bytes.fromhex(public_key)).digest()
-            ripemd160_hash = hashlib.new('ripemd160', sha256_hash).digest()
-            segwit_pkh = ripemd160_hash.hex()
+            sha256_hash = hashlib.sha256(bytes.fromhex(public_key)).hexdigest()
+            ripemd160_hash = ripemd160(sha256_hash)
+            segwit_pkh = ripemd160_hash
 
             if segwit_pkh != scriptpubkey_pkh:
                 mismatch_wpkh_transaction.append(transaction)
@@ -1117,9 +1117,9 @@ for i in range(len(json_data_list)):
             # check whether serialized inner redeem script gives the correct OP_HASH160
             scriptsig_asm_list = ip['scriptsig_asm'].split(' ')
             ser_redeem_script = scriptsig_asm_list[len(scriptsig_asm_list) - 1]
-            sha256_hash = hashlib.sha256(bytes.fromhex(ser_redeem_script)).digest()
-            ripemd160_hash = hashlib.new('ripemd160', sha256_hash).digest()
-            redeem_script_hash = ripemd160_hash.hex()
+            sha256_hash = hashlib.sha256(bytes.fromhex(ser_redeem_script)).hexdigest()
+            ripemd160_hash = ripemd160(sha256_hash)
+            redeem_script_hash = ripemd160_hash
 
             if redeem_script_hash != asm_list[2]:
                 invalid_txn.add(filename)
