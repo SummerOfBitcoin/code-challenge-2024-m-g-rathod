@@ -64,7 +64,7 @@ wtn_commitment = dsha256(temp)
 version = "01000000"
 inputs = "01" + "00" * 32 + "ffffffff" + "00" + "00000000"
 witness = "01" + "20" + "00" * 32
-total_fee += 312545559
+# total_fee += 312545559
 # print(total_fee)
 total_fee_hex = total_fee.to_bytes(8, byteorder='little').hex()
 outputs = "02" + total_fee_hex + "19" + "76a914cb4f45b4ecfe54b25106a919237cf34ce193c1b988ac" + "0000000000000000" + "26" + "6a24" + "aa21a9ed" + wtn_commitment
