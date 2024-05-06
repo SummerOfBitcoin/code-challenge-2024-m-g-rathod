@@ -81,7 +81,7 @@ prev_b_hash = "0000aeff00000000000000000000000000000000000000000000000000000000"
 b_merkle_root = merkle_root(txids)
 time = 1714978429
 time_hex = time.to_bytes(4, byteorder='little').hex()
-bits = "1f00ffff"
+bits = "ffff001f"
 
 target = "0000ffff00000000000000000000000000000000000000000000000000000000"
 target_decimal = int(target, 16)
@@ -104,8 +104,10 @@ while nonce < 4294967296:
 if flag == 0:
     print('no nonce found')
 
+prev_b_hash_little = bytes.fromhex(prev_b_hash)[::-1].hex()
+b_merkle_root_little = bytes.fromhex(b_merkle_root)[::-1].hex()
 nonce_hex = nonce.to_bytes(4, byteorder='little').hex()
-block_header = b_version + prev_b_hash + b_merkle_root + time_hex + bits + nonce_hex
+block_header = b_version + prev_b_hash_little + b_merkle_root_little + time_hex + bits + nonce_hex
 ser_coin_txn = version + "0001" + inputs + outputs + witness + locktime
 
 with open('output.txt', 'w') as file:
