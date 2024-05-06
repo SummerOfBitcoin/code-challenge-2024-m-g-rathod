@@ -24,7 +24,7 @@
   ],
   "vout": [
     {
-      "scriptpubkey": "76a9146085312a9c500ff9cc35b571b0a1e5efb7fb9f1688ac",
+      "scriptpubkey": " ",
       "scriptpubkey_asm": "OP_DUP OP_HASH160 OP_PUSHBYTES_20 6085312a9c500ff9cc35b571b0a1e5efb7fb9f16 OP_EQUALVERIFY OP_CHECKSIG",
       "scriptpubkey_type": "p2pkh",
       "scriptpubkey_address": "19oMRmCWMYuhnP5W61ABrjjxHc6RphZh11",
