@@ -80,7 +80,7 @@ b_version = "20800000"
 prev_b_hash = "0000aeff00000000000000000000000000000000000000000000000000000000"
 b_merkle_root = merkle_root(txids)
 time = 1714938506
-time_hex = time.to_bytes(4, byteorder='big').hex()
+time_hex = time.to_bytes(4, byteorder='little').hex()
 bits = "1f00ffff"
 
 target = "0000ffff00000000000000000000000000000000000000000000000000000000"
