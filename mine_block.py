@@ -44,7 +44,7 @@ txids = []
 
 for i in range(len(sorted_valid_txn)):
     transaction, fee, fee_wu, wu, txid, wtxid = sorted_valid_txn[i]
-    if total_wu + wu < 3999430:
+    if total_wu + wu < 3999370:
         total_wu += wu
         total_fee += fee
         high_fee_txn.append(sorted_valid_txn[i])
@@ -60,9 +60,9 @@ temp = wtn_root_hash + "00" * 32
 wtn_commitment = dsha256(temp)
 
 #coinbase transaction
-# 132 * 4 + 36 = 564
+# 147 * 4 + 36 = 624
 version = "01000000"
-inputs = "01" + "00" * 32 + "ffffffff" + "00" + "00000000"
+inputs = "01" + "00" * 32 + "ffffffff" + "0f" + "0e4d696e6564206279204d69686972" + "00000000"
 witness = "01" + "20" + "00" * 32
 # total_fee += 312545559
 # print(total_fee)
