@@ -1275,6 +1275,8 @@ for i in range(len(json_data_list)):
         if witness != "":
             temp += version + "0001" + inputs + outputs + witness + locktime
             wtxid = dsha256(temp)
+        else:
+            wtxid = txid
         
         fee = input_value - output_value
         fee_wu = fee // wu

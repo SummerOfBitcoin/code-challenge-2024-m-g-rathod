@@ -48,9 +48,7 @@ for i in range(len(sorted_valid_txn)):
         total_wu += wu
         total_fee += fee
         high_fee_txn.append(sorted_valid_txn[i])
-        if len(wtxid) > 0:
-            wtxids.append(wtxid)
-
+        wtxids.append(wtxid)
         txids.append(txid)
     else:
         break
@@ -81,7 +79,7 @@ prev_b_hash = "0000aeff00000000000000000000000000000000000000000000000000000000"
 prev_b_hash_little = bytes.fromhex(prev_b_hash)[::-1].hex()
 b_merkle_root = merkle_root(txids)
 b_merkle_root_little = bytes.fromhex(b_merkle_root)[::-1].hex()
-time = 1714992489
+time = 1714993000
 time_hex = time.to_bytes(4, byteorder='little').hex()
 bits = "ffff001f"
 
